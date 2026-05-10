@@ -1,0 +1,312 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+/* -----------------------------------------
+   ANIMATIONS
+   ----------------------------------------- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+:root {
+  /* Brand Colors (Static) */
+  --primary: #6366f1;
+  --primary-light: #818cf8;
+  --card-gradient: linear-gradient(135deg, #6366f1, #8b5cf6);
+  --danger: #f43f5e;
+  --success: #10b981;
+  --warning: #f59e0b;
+}
+
+/* -----------------------------------------
+   DARK MODE (Default)
+   ----------------------------------------- */
+:root[data-theme='dark'] {
+  --bg-app: #050509;
+  --bg-panel: #18181b;
+  --bg-panel-hover: #27272a;
+
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-inverse: #020617;
+
+  --border-light: rgba(255, 255, 255, 0.1);
+  --border-faint: rgba(255, 255, 255, 0.05);
+
+  --glass-bg: rgba(24, 24, 27, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.05);
+  --glass-shadow: rgba(0, 0, 0, 0.3);
+
+  --input-bg: rgba(255, 255, 255, 0.03);
+  --input-border: rgba(255, 255, 255, 0.1);
+  --input-focus: rgba(255, 255, 255, 0.06);
+
+  --msg-bot-bg: rgba(255, 255, 255, 0.03);
+  --msg-bot-border: rgba(255, 255, 255, 0.08);
+  --msg-bot-text: #ffffff;
+
+  --crisis-bg: rgba(244, 63, 94, 0.1);
+  --crisis-border: rgba(244, 63, 94, 0.3);
+
+  --btn-icon-bg: rgba(255, 255, 255, 0.05);
+  --btn-icon-hover: rgba(255, 255, 255, 0.1);
+
+  --scrollbar-track: transparent;
+  --scrollbar-thumb: rgba(255, 255, 255, 0.1);
+  --scrollbar-thumb-hover: rgba(255, 255, 255, 0.2);
+}
+
+/* -----------------------------------------
+   LIGHT MODE
+   ----------------------------------------- */
+:root[data-theme='light'] {
+  --bg-app: #f4f5fb;
+  --bg-panel: #ffffff;
+  --bg-panel-hover: #f1f5f9;
+
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --text-inverse: #ffffff;
+
+  --border-light: rgba(0, 0, 0, 0.1);
+  --border-faint: rgba(0, 0, 0, 0.05);
+
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --glass-shadow: rgba(0, 0, 0, 0.05);
+
+  --input-bg: rgba(0, 0, 0, 0.02);
+  --input-border: rgba(0, 0, 0, 0.15);
+  --input-focus: rgba(0, 0, 0, 0.06);
+
+  --msg-bot-bg: #ffffff;
+  --msg-bot-border: rgba(0, 0, 0, 0.08);
+  --msg-bot-text: #0f172a;
+
+  --crisis-bg: rgba(244, 63, 94, 0.05);
+  --crisis-border: rgba(244, 63, 94, 0.3);
+
+  --btn-icon-bg: rgba(0, 0, 0, 0.03);
+  --btn-icon-hover: rgba(0, 0, 0, 0.08);
+
+  --scrollbar-track: transparent;
+  --scrollbar-thumb: rgba(0, 0, 0, 0.2);
+  --scrollbar-thumb-hover: rgba(0, 0, 0, 0.3);
+}
+
+/* -----------------------------------------
+   GLOBAL STYLES & RESET
+   ----------------------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Outfit', sans-serif;
+  /* Smooth transitions for theme switching */
+  transition: background-color 0.4s ease, border-color 0.4s ease;
+}
+
+body {
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-image:
+    radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.06) 0%, transparent 40%),
+    radial-gradient(circle at 85% 30%, rgba(20, 184, 166, 0.06) 0%, transparent 40%);
+  background-attachment: fixed;
+}
+
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* -----------------------------------------
+   UTILITY CLASSES (Glass, Gradients, etc)
+   ----------------------------------------- */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px 0 var(--glass-shadow);
+}
+
+.text-gradient {
+  background: var(--card-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.bg-gradient-primary {
+  background: var(--card-gradient);
+}
+
+/* -----------------------------------------
+   INPUTS & BUTTONS
+   ----------------------------------------- */
+.input-premium {
+  width: 100%;
+  padding: 1rem 1.2rem;
+  background: var(--input-bg) !important;
+  border: 1px solid var(--input-border);
+  border-radius: 12px;
+  color: var(--text-main) !important;
+  font-size: 1.1rem;
+  outline: none;
+}
+
+.input-premium:focus {
+  border-color: var(--primary);
+  background: var(--input-focus) !important;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+/* Select element specific styling */
+.input-premium[type="select"],
+.input-premium select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23818cf8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.7rem center;
+  background-size: 1.5em 1.5em;
+  padding-right: 2.5rem;
+  color: var(--text-main) !important;
+}
+
+.input-premium[type="number"] {
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+}
+
+.input-premium[type="number"]::-webkit-outer-spin-button,
+.input-premium[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.input-premium select {
+  background-color: var(--input-bg) !important;
+  color: var(--text-main) !important;
+}
+
+.input-premium select option {
+  background: var(--bg-panel);
+  color: var(--text-main);
+  padding: 0.8rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.input-premium select option:checked {
+  background: var(--primary);
+  color: #fff;
+}
+
+.input-premium select option:disabled {
+  color: var(--text-muted);
+  opacity: 0.7;
+}
+
+.btn-premium {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  background: var(--card-gradient);
+  border: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.4);
+}
+
+.btn-premium:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.4), 0 8px 10px -6px rgba(99, 102, 241, 0.2);
+}
+
+.btn-premium:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* -----------------------------------------
+   MOOD INDICATOR GLOWS
+   ----------------------------------------- */
+.mood-glow-joy {
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+  border-color: var(--success) !important;
+  color: var(--success);
+}
+
+.mood-glow-sadness {
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+  border-color: #38bdf8 !important;
+  color: #38bdf8;
+}
+
+.mood-glow-anger {
+  box-shadow: 0 0 20px rgba(244, 63, 94, 0.3);
+  border-color: var(--danger) !important;
+  color: var(--danger);
+}
+
+.mood-glow-fear {
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+  border-color: var(--warning) !important;
+  color: var(--warning);
+}
+
+.mood-glow-love {
+  box-shadow: 0 0 20px rgba(244, 114, 182, 0.3);
+  border-color: #f472b6 !important;
+  color: #f472b6;
+}
+
+.mood-glow-surprise {
+  box-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
+  border-color: #fbbf24 !important;
+  color: #fbbf24;
+}
+
+.mood-glow-default {
+  box-shadow: 0 0 10px var(--border-faint);
+  border-color: var(--border-light) !important;
+}
+
+/* -----------------------------------------
+   CUSTOM SCROLLBAR
+   ----------------------------------------- */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
