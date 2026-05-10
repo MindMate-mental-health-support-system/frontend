@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Sparkles, User, Lock, Mail, ArrowRight } from 'lucide-react';
 import axios from 'axios';
+import { API_BASE_URL } from '../config';
 import CustomSelect from '../components/CustomSelect';
 
 const SignupPage = () => {
@@ -33,7 +34,7 @@ const SignupPage = () => {
 
         setIsLoading(true);
         try {
-            const response = await axios.post('http://localhost:5000/api/users/signup', formData);
+            const response = await axios.post(`${API_BASE_URL}/api/users/signup`, formData);
             if (response.data.user) {
                 // Redirect to login after successful signup
                 navigate('/login');

@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Sparkles, User, Lock, ArrowRight } from 'lucide-react';
 import axios from 'axios';
+import { API_BASE_URL } from '../config';
 
 const LoginPage = () => {
     const navigate = useNavigate();
@@ -28,7 +29,7 @@ const LoginPage = () => {
 
         setIsLoading(true);
         try {
-            const response = await axios.post('http://localhost:5000/api/users/login', {
+            const response = await axios.post(`${API_BASE_URL}/api/users/login`, {
                 identifier: identifier.trim(),
                 password: password.trim()
             });
