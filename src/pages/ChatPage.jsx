@@ -866,27 +866,7 @@ const ChatPage = () => {
                                                         </button>
                                                     </div>
                                                 )}
-                                                {msg.emotion && (
-                                                    <div style={{
-                                                        display: 'inline-flex',
-                                                        alignItems: 'center',
-                                                        gap: '6px',
-                                                        fontSize: '0.85rem',
-                                                        background: 'rgba(255, 255, 255, 0.1)',
-                                                        padding: '4px 8px',
-                                                        borderRadius: '12px',
-                                                        width: 'fit-content',
-                                                        color: msg.sender === 'user' ? '#ffffff' : 'var(--primary-light)'
-                                                    }}>
-                                                        <Zap size={14} />
-                                                        <span style={{ fontWeight: '600', textTransform: 'capitalize' }}>{msg.emotion}</span>
-                                                        {msg.emotionConfidence && (
-                                                            <span style={{ opacity: 0.7, fontSize: '0.8rem' }}>
-                                                                ({(msg.emotionConfidence * 100).toFixed(0)}%)
-                                                            </span>
-                                                        )}
-                                                    </div>
-                                                )}
+
                                                 {msg.text && (!msg.audioUrl || visibleTranscripts[msg.id]) && (
                                                     <span style={{ color: msg.sender === 'user' ? '#ffffff' : 'inherit', marginTop: msg.audioUrl ? '8px' : '0', display: 'block', padding: msg.audioUrl ? '8px' : '0', background: msg.audioUrl ? 'rgba(0,0,0,0.1)' : 'transparent', borderRadius: '8px' }}>
                                                         {msg.text}
